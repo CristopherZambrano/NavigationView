@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         user = findViewById(R.id.user);
         pass = findViewById(R.id.password);
         login = findViewById(R.id.button);
+        Bundle b = new Bundle();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 if(user.getText().toString().equals(users.getUser1())||user.getText().toString().equals(users.getUser2())){
                     if (pass.getText().toString().equals(users.getPassword1())){
                         Intent intent = new Intent(MainActivity.this,inicio.class);
+                        b.putString("user",user.getText().toString());
+                        if (user.getText().toString().equals(users.getUser1())){
+                            b.putString("tipouser",users.getTipo1());
+                        }
+                        else{
+                            b.putString("tipouser",users.getTipo2());
+                        }
+                        intent.putExtras(b);
                         startActivity(intent);
                     }else{
                         Toast.makeText(MainActivity.this,"Contraseña incorrecta para "+user.getText(), Toast.LENGTH_LONG).show();
